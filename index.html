@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <button class="btn-open" data-modal="#modal1">Open</button>
+  <div class="modal" id="modal1">modal</div>
+  <button class="btn-open" data-modal="#modal2">Open</button>
+  <div class="modal" id="modal2">modal</div>
+
+  <script>
+    (function(){
+      // 'use strict';
+
+      let d = document,
+          btnOpens = d.querySelectorAll('.btn-open');
+
+      this.Modal = function() {
+
+        let defaults = {
+          className: "elme-pop",
+          minWidth: 320,
+          closeBtn: "x"
+        }
+
+        if(arguments[0] && typeof arguments[0] === 'object') {
+          this.option = extendOptions(defaults, arguments[0])
+        }      
+        
+        // methods
+        function extendOptions (source, properties) {
+          for ( var property in properties ) {
+            if(properties.hasOwnProperty(property))
+              source[property] = properties[property]
+          }
+
+          return source
+        }
+
+        Modal.prototype.open = (el) => {
+
+          let targetElem = el.target.getAttribute('data-modal');
+          d.querySelector(targetElem).classList.toggle(this.option.className)
+          
+        }
+
+
+        btnOpens.forEach(el => {
+          el.addEventListener('click', this.open.bind(this))
+        });
+
+      }
+
+
+      let myModal = new Modal({
+        className: "gwapo",
+        minWidth: 28
+      });
+
+      console.log(myModal)
+
+    })();
+
+  </script>
+</body>
+</html>
