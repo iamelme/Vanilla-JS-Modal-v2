@@ -9,9 +9,9 @@
 <body>
   
 
-  <button class="btn-open" data-modal="#modal1">Open</button>
+  <button class="btn-open" id="btn1" data-modal="#modal1">Open</button>
   <div class="modal" id="modal1">modal</div>
-  <button class="btn-open" data-modal="#modal2">Open</button>
+  <button class="btn-open" id="btn2" data-modal="#modal2">Open</button>
   <div class="modal" id="modal2">modal</div>
 
   <script>
@@ -19,18 +19,29 @@
       // 'use strict';
 
       let d = document,
-          btnOpens = d.querySelectorAll('.btn-open');
+          btnElem = d.querySelectorAll('.btn-open'),
+          btnOpener = null,
+          btnType = null,
+          targetElem = null;
 
       this.Modal = function() {
 
+        // elements 
+
+        this.modal = null
+        this.pop = false
+        this.closeBtn = null
+        this.overlay = null
+
         let defaults = {
+          el: ".btn-open",
           className: "elme-pop",
           minWidth: 320,
           closeBtn: "x"
         }
 
         if(arguments[0] && typeof arguments[0] === 'object') {
-          this.option = extendOptions(defaults, arguments[0])
+          this.options = extendOptions(defaults, arguments[0])
         }      
         
         // methods
@@ -39,31 +50,100 @@
             if(properties.hasOwnProperty(property))
               source[property] = properties[property]
           }
-
           return source
         }
 
-        Modal.prototype.open = (el) => {
+        function createModalElem () {
 
-          let targetElem = el.target.getAttribute('data-modal');
-          d.querySelector(targetElem).classList.toggle(this.option.className)
+          if(typeof this.options.closeBtn === 'string') {
+
+            this.closeBtn = d.createElement('button')
+            this.closeBtn.classList.add('btn-close')
+            this.closeBtn.innerHTML = this.options.closeBtn
+            this.overlay = d.createElement('div')
+            this.overlay.classList.add('overlay')
+
+            d.querySelector(this.modal).appendChild(this.closeBtn)
+            d.querySelector(this.modal).appendChild(this.overlay)
+            d.querySelector(this.modal).classList.toggle(this.options.className)
+            
+            // if(this.pop) {
+            //   newBtn.addEventListener('click', function() {
+            //     this.pop = false
+            //   });
+            // }
+
+          } else {
+            console.log('dili string')
+          }
+        }
+
+        function destroyModalElem () {
+
+          let _ = this;
+
           
         }
 
+        function initWew () {
+          if(this.closeBtn) {
+            this.closeBtn.addEventListener('click', this.close.bind(this));
+          }
+        }
 
-        btnOpens.forEach(el => {
-          el.addEventListener('click', this.open.bind(this))
-        });
+        Modal.prototype.open = function(el) {
+
+          console.log(this.options.className)
+          
+          if(!this.pop) {
+            
+            this.modal = el.getAttribute('data-modal');
+            console.log(this.modal)
+            
+
+            this.pop = true
+
+            createModalElem.call(this)
+          }
+
+          initWew.call(this)
+        }
+
+        Modal.prototype.close = function () {
+          console.log(this.modal)
+          this.pop = false
+          d.querySelector(this.modal).removeChild(this.closeBtn)
+          d.querySelector(this.modal).removeChild(this.overlay)
+          d.querySelector(this.modal).classList.remove(this.options.className)
+        }
+
+        
+
+        if( this.options.el[0] === '.' && this.options.el[0] !== null || this.options.el[0] === '#' ) {
+          btnOpener = this.options.el;
+          d.querySelectorAll(btnOpener).forEach(el => {
+            el.addEventListener('click', this.open.bind(this, el))
+          });
+        } else {
+          console.log(this.options.el[0])
+        }
 
       }
 
-
       let myModal = new Modal({
+        el: '#btn1',
         className: "gwapo",
         minWidth: 28
       });
 
-      console.log(myModal)
+      let myModal2 = new Modal({
+        el: '#btn2',
+        className: "cute",
+        minWidth: 28,
+        closeBtn: 'y'
+      });
+
+      // console.log(myModal)
 
     })();
 
