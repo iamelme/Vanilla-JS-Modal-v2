@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(53, 73, 90, .5)
+}
+
+.modal {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transition: all .3s;
+  transform: translate(-50%, -50%);
+
+  &.open {
+
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    
+  } 
+
+}
+
+.modal-content {
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 0 15px rgba(0,0,0,.1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  transform: translate(50%, -50%);
+  cursor: pointer
+}
