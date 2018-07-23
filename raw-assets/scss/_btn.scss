@@ -1,0 +1,16 @@
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 50px;
+  border: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-open {
+  padding: 8px 35px;
+  background: #4b28a5;
+  letter-spacing: .15em;
+  color: #00ffff;
+}

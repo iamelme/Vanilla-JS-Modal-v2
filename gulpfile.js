@@ -1,10 +1,13 @@
 const gulp = require('gulp')
 const browserSync = require('browser-sync').create()
 const scss = require('gulp-sass')
+const gutil = require('gulp-util')
+const plumber = require('gulp-plumber')
 
 
 gulp.task('scss', function() {
   return gulp.src(['raw-assets/scss/*.scss'])
+    .pipe(plumber())
     .pipe(scss())
     .pipe(gulp.dest('assets/css'))
     .pipe(browserSync.stream())

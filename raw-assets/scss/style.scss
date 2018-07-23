@@ -1,42 +1,33 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
+@import 'normalize';
+@import 'modal';
+@import 'btn';
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+html,
+body {
   width: 100%;
   height: 100%;
-  background: rgba(53, 73, 90, .5)
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
-.modal {
-  position: absolute;
-  top: -100%;
-  left: 50%;
-  transition: all .3s;
-  transform: translate(-50%, -50%);
-
-  &.open {
-
-    position: absolute;
-    top: 50%;
-    z-index: 3;
-    
-  } 
-
+* {
+  box-sizing: border-box;
+  outline: none; 
 }
 
-.modal-content {
-  padding: 10px 20px;
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 0 0 15px rgba(0,0,0,.1);
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#eadafe, #3b83df)
 }
 
-.modal-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  transform: translate(50%, -50%);
-  cursor: pointer
+.container {
+  
 }
