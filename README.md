@@ -8,7 +8,7 @@ Thanks in advance.
 [Here's the demo](https://iamelme.github.io/Vanilla-JS-Modal-v2/)
 
 
-```
+```javascript
 const myModal = new Modal({
   el: '#btn1', // el stands for element, this element will be the target modal of our class
   className: 'gwapo', // default css class is elme-pop
